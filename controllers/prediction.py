@@ -7,8 +7,8 @@ import pickle
 
 #les columns du tableau
 def columns():
-    return {'Age', 'Sex', 'ALB', 'ALP', 'ALT', 'AST',
-       'BIL', 'CHE', 'CHOL', 'CREA', 'GGT', 'PROT'}
+    return ["id","Fname","Lname",'Sex','Age', 'ALB', 'ALP', 'ALT', 'AST',
+       'BIL', 'CHE', 'CHOL', 'CREA', 'GGT', 'PROT',"Resp"]
 
 #le chargement du model
 loaded_model = pickle.load(open("final_model.sav", 'rb'))
@@ -16,7 +16,8 @@ loaded_model = pickle.load(open("final_model.sav", 'rb'))
 #lecture du dataframe
 df=pd.read_csv("hepathie_c.csv")
 
-def form2data(form):
+#donner utils du formulaire
+def form_util_values(form):
     age=form.get('age')
     sex=form.get('sex')
     alb=form.get('alb')
@@ -29,7 +30,12 @@ def form2data(form):
     crea=form.get('crea')
     ggt=form.get('ggt')
     prot=form.get('prot')
-    return np.array([age,sex,alb,alp,alt,ast,bil,che,chol,crea,ggt,prot],dtype=np.float).reshape(1,-1)
+    return age,sex,alb,alp,alt,ast,bil,che,chol,crea,ggt,prot
+
+#donner pour la prediction
+def form2data(form):
+    
+    return np.array([form_util_values(form)],dtype=np.float).reshape(1,-1)
 
 
 def predict(data):

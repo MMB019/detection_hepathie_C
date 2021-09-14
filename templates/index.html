@@ -167,20 +167,16 @@
             </tr>
           </thead>
           <tbody>
-            {% if values!="" %}
-            <tr>
-            {% for value in values %} 
-              <td>value</td>
-              {% endfor %}
-            </tr>
-            {% endif%}
-            {% if values=="" %}
-                <tr>
-                    {% for column in columns %} 
-                      <td>valeur</td>
-                      {% endfor %}
-                </tr>
-            {% endif %}
+            {% for value in values %}
+
+              <tr>
+                {% for c in value %}
+                  <td>{{c}}</td>
+                {% endfor %}
+              </tr>
+            {%endfor%}
+
+            
           </tbody>
         </table>
       </div>
